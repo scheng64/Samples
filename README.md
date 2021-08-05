@@ -1,2 +1,2 @@
 # Samples
-Simple examples
+Simple examples such as Nginx, NFS persistent volume provisioner
