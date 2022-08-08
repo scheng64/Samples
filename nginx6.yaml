@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx6
+  labels:
+    app: nginx6
+spec:
+  ipFamilyPolicy: SingleStack
+  ipFamilies:
+  - IPv6
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  selector:
+      app: nginx6
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx6
+spec:
+  selector:
+    matchLabels:
+      app: nginx6
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx6
+    spec:
+      containers:
+      - name: nginx6
+        image: registry.ipv6.docker.com/library/nginx:1.21.5
+        ports:
+        - containerPort: 80 
